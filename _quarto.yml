@@ -8,6 +8,9 @@ book:
   date: "27/07/2023"
   chapters:
     - index.qmd
+    - computations.ipynb
+    - orcid_get_works_by_person.ipynb
+    - video.ipynb
     - intro.qmd
     - summary.qmd
     - references.qmd

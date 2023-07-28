@@ -7,16 +7,51 @@
     "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books."
   },
   {
+    "objectID": "computations.html#numpy",
+    "href": "computations.html#numpy",
+    "title": "1  Quarto Computations",
+    "section": "1.1 NumPy",
+    "text": "1.1 NumPy\n\nimport numpy as np\na = np.arange(15).reshape(3, 5)\na\n\narray([[ 0,  1,  2,  3,  4],\n       [ 5,  6,  7,  8,  9],\n       [10, 11, 12, 13, 14]])"
+  },
+  {
+    "objectID": "computations.html#matplotlib",
+    "href": "computations.html#matplotlib",
+    "title": "1  Quarto Computations",
+    "section": "1.2 Matplotlib",
+    "text": "1.2 Matplotlib\n\nimport matplotlib.pyplot as plt\n\nfig = plt.figure()\nx = np.arange(10)\ny = 2.5 * np.sin(x / 20 * np.pi)\nyerr = np.linspace(0.05, 0.2, 10)\n\nplt.errorbar(x, y + 3, yerr=yerr, label='both limits (default)')\nplt.errorbar(x, y + 2, yerr=yerr, uplims=True, label='uplims=True')\nplt.errorbar(x, y + 1, yerr=yerr, uplims=True, lolims=True,\n             label='uplims=True, lolims=True')\n\nupperlimits = [True, False] * 5\nlowerlimits = [False, True] * 5\nplt.errorbar(x, y, yerr=yerr, uplims=upperlimits, lolims=lowerlimits,\n             label='subsets of uplims and lolims')\n\nplt.legend(loc='lower right')\nplt.show(fig)"
+  },
+  {
+    "objectID": "computations.html#plotly",
+    "href": "computations.html#plotly",
+    "title": "1  Quarto Computations",
+    "section": "1.3 Plotly",
+    "text": "1.3 Plotly\n\nimport plotly.express as px\nimport plotly.io as pio\ngapminder = px.data.gapminder()\ngapminder2007 = gapminder.query(\"year == 2007\")\nfig = px.scatter(gapminder2007, \n                 x=\"gdpPercap\", y=\"lifeExp\", color=\"continent\", \n                 size=\"pop\", size_max=60,\n                 hover_name=\"country\")\nfig.show()\n\nUnable to display output for mime type(s): application/vnd.plotly.v1+json"
+  },
+  {
+    "objectID": "orcid_get_works_by_person.html",
+    "href": "orcid_get_works_by_person.html",
+    "title": "2  Query ORCID for works authored by a person",
+    "section": "",
+    "text": "Taken from Project TAPIR’s repository of Jupyter Notebooks: https://github.com/Project-TAPIR/pidgraph-notebooks\nThis notebook queries the ORCID Public API to retrieve works listed in a person’s ORCID record. It takes an ORCID URL or iD as input to retrieve the ORCID record of a person and the works listed on it. From the resulting list of works we output all DOIs.\n\n# Prerequisites:\nimport requests                        # dependency to make HTTP calls\nfrom benedict import benedict          # dependency for dealing with json\n\nThe input for this notebook is an ORCID URL or iD, e.g. ‘https://orcid.org/0000-0003-2499-7741’ or ‘0000-0003-2499-7741’.\n\n# input parameter\nexample_orcid=\"https://orcid.org/0000-0002-2437-589X\"\n\nWe use it to query ORCID’s Public API for the person’s metadata and all works connected to them.\n\n# URL for ORCID API\nORCID_RECORD_API = \"https://pub.orcid.org/v3.0/\"\n\n# query ORCID for an ORCID record\ndef query_orcid_for_record(orcid_id):\n\n    response = requests.get(url=requests.utils.requote_uri(ORCID_RECORD_API + orcid_id),\n                          headers={'Accept': 'application/json'})\n    response.raise_for_status()\n    result=response.json()\n    return result\n\n\n#-- example execution\norcid_id=example_orcid.replace(\"https://orcid.org/\", \"\")\norcid_record=query_orcid_for_record(orcid_id)\n# uncomment next lines to see complete metadata for given ORCID\n#import pprint\n#pprint.pprint(orcid_record)\n\nFrom the complete ORCID metadata we extract the works section and print out title and DOI of each first work-summary (the first item in a personal information section has the highest display index).\nNote: works that do not have a DOI assigned, will not be printed.\n\n# extract works section from ORCID profile\ndef extract_works_section(orcid_record):\n    orcid_dict=benedict.from_json(orcid_record)\n    works=orcid_dict.get('activities-summary.works.group') or []\n    return works\n\n# for each work in the work section: extract title and DOI\ndef extract_doi(work):\n    work_dict=benedict.from_json(work)\n    title=work_dict.get('work-summary[0].title.title.value')\n    dois= [doi['external-id-value'] for doi in work_dict.get('work-summary[0].external-ids.external-id', []) if doi['external-id-type']==\"doi\"]\n    # if there is a DOI assigned to the work, the list of dois is not empty and we can extract the first one\n    doi=dois[0] if dois else None\n    return doi, title\n\n\n# ---- example execution\nworks=extract_works_section(orcid_record)\nfor work in works:\n    doi,title = extract_doi(work)\n    if doi:\n        print(f\"{doi}, {title}\")\n\n10.21428/785a6451.af466093, What is computational publishing?\n10.21428/785a6451.1792b84f, Books Contain Multitudes\n10.21428/785a6451.0ed93b68, Part 1: Mapping & Situating Experimental Books\n10.21428/785a6451.cd58a48e, Part 2: A Typology of Experimental Books\n10.21428/785a6451.c4d3ffa1, Introducing COPIM's new website\n10.17613/d4rs-rx03, Posthumanism in Outer Wilds\n10.17613/5SJE-W447, New Sincerity, the Weird, and the post-ironic turn in contemporary indie video games\n10.20944/preprints202001.0240.v1, Open or Ajar? Openness within the Neoliberal Academy"
+  },
+  {
+    "objectID": "video.html#video---developing-an-open-source-data-pipeline-for-participation-in-community-knowledge-bases---httpsav.tib.eumedia56162",
+    "href": "video.html#video---developing-an-open-source-data-pipeline-for-participation-in-community-knowledge-bases---httpsav.tib.eumedia56162",
+    "title": "3  Embedded video",
+    "section": "3.1 Video - Developing an open source data pipeline for participation in community knowledge bases - https://av.tib.eu/media/56162",
+    "text": "3.1 Video - Developing an open source data pipeline for participation in community knowledge bases - https://av.tib.eu/media/56162\nThe below Python code experiments with retrieving video data via iframe embedding.\n\nfrom IPython.display import HTML\nHTML(\"\"\"\n<iframe width=\"560\" height=\"315\" scrolling=\"no\" src=\"https://av.tib.eu/player/56162\" frameborder=\"0\" allowfullscreen></iframe>\n\"\"\")"
+  },
+  {
     "objectID": "intro.html",
     "href": "intro.html",
-    "title": "1  Introduction",
+    "title": "4  Introduction",
     "section": "",
     "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
     "objectID": "summary.html",
     "href": "summary.html",
-    "title": "2  Summary",
+    "title": "5  Summary",
     "section": "",
     "text": "In summary, this book has no content whatsoever."
   },
