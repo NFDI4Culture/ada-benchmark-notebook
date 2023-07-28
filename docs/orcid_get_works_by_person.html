@@ -226,12 +226,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> benedict <span class="im">import</span> benedict          <span class="co"># dependency for dealing with json</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The input for this notebook is an ORCID URL or iD, e.g.&nbsp;‘<code>https://orcid.org/0000-0003-2499-7741</code>’ or ‘<code>0000-0003-2499-7741</code>’.</p>
-<div class="cell" data-executioninfo="{&quot;elapsed&quot;:20,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1643202545770,&quot;user&quot;:{&quot;displayName&quot;:&quot;Sandra M&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a-/AOh14GjjehryRcYlqHNFf_9Q6slGN_VZPE0y5QkvOxzG=s64&quot;,&quot;userId&quot;:&quot;04602594913862593282&quot;},&quot;user_tz&quot;:-60}" data-execution_count="2">
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:20,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1643202545770,&quot;user&quot;:{&quot;displayName&quot;:&quot;Sandra M&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a-/AOh14GjjehryRcYlqHNFf_9Q6slGN_VZPE0y5QkvOxzG=s64&quot;,&quot;userId&quot;:&quot;04602594913862593282&quot;},&quot;user_tz&quot;:-60}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># input parameter</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>example_orcid<span class="op">=</span><span class="st">"https://orcid.org/0000-0002-2437-589X"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We use it to query ORCID’s Public API for the person’s metadata and all works connected to them.</p>
-<div class="cell" data-executioninfo="{&quot;elapsed&quot;:685,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1643202546441,&quot;user&quot;:{&quot;displayName&quot;:&quot;Sandra M&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a-/AOh14GjjehryRcYlqHNFf_9Q6slGN_VZPE0y5QkvOxzG=s64&quot;,&quot;userId&quot;:&quot;04602594913862593282&quot;},&quot;user_tz&quot;:-60}" data-execution_count="3">
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:685,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1643202546441,&quot;user&quot;:{&quot;displayName&quot;:&quot;Sandra M&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a-/AOh14GjjehryRcYlqHNFf_9Q6slGN_VZPE0y5QkvOxzG=s64&quot;,&quot;userId&quot;:&quot;04602594913862593282&quot;},&quot;user_tz&quot;:-60}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># URL for ORCID API</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ORCID_RECORD_API <span class="op">=</span> <span class="st">"https://pub.orcid.org/v3.0/"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -254,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>From the complete ORCID metadata we extract the works section and print out title and DOI of each first <code>work-summary</code> (the first item in a personal information section has the highest <a href="https://info.orcid.org/documentation/integration-guide/orcid-record/#Display_index">display index</a>).</p>
 <p><em>Note: works that do not have a DOI assigned, will not be printed.</em></p>
-<div class="cell" data-executioninfo="{&quot;elapsed&quot;:12,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1643202546444,&quot;user&quot;:{&quot;displayName&quot;:&quot;Sandra M&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a-/AOh14GjjehryRcYlqHNFf_9Q6slGN_VZPE0y5QkvOxzG=s64&quot;,&quot;userId&quot;:&quot;04602594913862593282&quot;},&quot;user_tz&quot;:-60}" data-outputid="7e726c92-df32-43db-c3d7-800c4160d9ea" data-execution_count="4">
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:12,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1643202546444,&quot;user&quot;:{&quot;displayName&quot;:&quot;Sandra M&quot;,&quot;photoUrl&quot;:&quot;https://lh3.googleusercontent.com/a-/AOh14GjjehryRcYlqHNFf_9Q6slGN_VZPE0y5QkvOxzG=s64&quot;,&quot;userId&quot;:&quot;04602594913862593282&quot;},&quot;user_tz&quot;:-60}" data-outputid="7e726c92-df32-43db-c3d7-800c4160d9ea" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract works section from ORCID profile</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> extract_works_section(orcid_record):</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    orcid_dict<span class="op">=</span>benedict.from_json(orcid_record)</span>
@@ -280,9 +280,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>10.21428/785a6451.af466093, What is computational publishing?
 10.21428/785a6451.1792b84f, Books Contain Multitudes
-10.21428/785a6451.0ed93b68, Part 1: Mapping &amp; Situating Experimental Books
-10.21428/785a6451.cd58a48e, Part 2: A Typology of Experimental Books
 10.21428/785a6451.c4d3ffa1, Introducing COPIM's new website
+https://doi.org/10.17613/yk49-zh32, The Fire in Which We Burn: Time and Trauma in Contemporary Television
 10.17613/d4rs-rx03, Posthumanism in Outer Wilds
 10.17613/5SJE-W447, New Sincerity, the Weird, and the post-ironic turn in contemporary indie video games
 10.20944/preprints202001.0240.v1, Open or Ajar? Openness within the Neoliberal Academy</code></pre>
