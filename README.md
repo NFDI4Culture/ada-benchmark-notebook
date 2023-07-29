@@ -74,15 +74,14 @@ Test Quarto in the TERMINAL and run: quarto check
 
 Output should be as below. R installation is not needed.
 
-[>] Checking Quarto installation......OK
-      Version: 1.2.475
+`[>] Checking Quarto installation......OK`
+      `Version: 1.2.475
       Jupyter: 4.11.2
-      Kernels: python3
+      Kernels: python3`
 
-[>] Checking Jupyter engine render....OK
+`[>] Checking Jupyter engine render....OK`
 
-[>] Checking R installation...........(None)
-
-      Unable to locate an installed version of R.
-      Install R from https://cloud.r-project.org/
+`[>] Checking R installation...........(None)`
+      `Unable to locate an installed version of R.
+      Install R from https://cloud.r-project.org/`
 
